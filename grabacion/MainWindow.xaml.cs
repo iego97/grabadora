@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using NAudio;
 using NAudio.Wave;
+using NAudio.Dsp;
 
 
 namespace grabacion
@@ -72,18 +73,20 @@ namespace grabacion
                 short muestra = 
                     (short)Math.Abs((buffer[i+1] << 8) | buffer[i]);
 
-                //lblMuestras.Text = muestra.ToString();
-
+                float muestra32bits = (float)muestra / 32768.0f;
                 
 
-                acumulador += muestra;
-                numMuestras++;
+                sldVolumen.Value = Math.Abs(muestra32bits);
+                
+
+                //acumulador += muestra;
+                //numMuestras++;
 
 
             }
 
             double promedio = acumulador / numMuestras;
-            sldVolumen.Value = promedio;
+            //sldVolumen.Value = promedio;
             //writer.Write(buffer, 0, bytesGrabados);
         }
 
