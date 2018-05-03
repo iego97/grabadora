@@ -63,7 +63,23 @@ namespace grabacion
 
 
             double acumulador = 0;
-            double numMuestras = 0;
+            double numMuestras = bytesGrabados / 2;
+            int exponente = 1;
+            int numeroMuestasComplejas = 0;
+            int bitsMaximos = 0;
+
+            do
+            {
+                bitsMaximos = (int)Math.Pow(2, exponente);
+                exponente++;
+            } while (bitsMaximos < (int)numMuestras);
+
+            exponente -= 2;
+            numeroMuestasComplejas = bitsMaximos / 2;
+
+
+            Complex[] muestrasComplejas =
+                new Complex[5];
 
             for (int i = 0; i < bytesGrabados; i+=2)
             {
